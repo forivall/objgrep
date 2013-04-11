@@ -19,6 +19,7 @@
           return [context];
         }
         break;
+      case 'function':
       case 'object':
         if (!root || root.hasOwnProperty(mark)) {
           return [];  // cyclic
@@ -64,7 +65,7 @@
     enumerable: false,
     value: function (regex, depth, allow_dom, context) {
       if (typeof depth !== "number") {
-        depth = 5;
+        depth = 8;
         console.log('Using a default search depth of ' + depth);
       }
       if (typeof allow_dom === 'undefined') {
