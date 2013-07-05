@@ -31,7 +31,7 @@
           return [];  // cyclic
         }
         root[mark] = true;
-        _keys = Object_allKeys(root);
+        _keys = object_allKeys(root);
         _keys.push('prototype');
         
         for (_i = 0;_i < _keys.length; _i++) {
