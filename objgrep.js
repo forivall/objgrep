@@ -1,10 +1,16 @@
 /*jslint browser: true, indent: 2, forin: true */
 /*global toString, console */
 (function () {
+  function object_allKeys(obj) {
+    var i, keys = [];
+    for (i in obj) { keys.push(i); }
+    return keys;
+  }
+  
   "use strict";
   var mark = 'visited_by_objgrep',
     objgrep = function (root, regex, depth, allow_dom, context) {
-      var className, ret = [], i, newContext;
+      var className, ret = [], i, newContext, _keys, _i;
       context = context || '';
 
       if (depth < 1) {
@@ -25,7 +31,11 @@
           return [];  // cyclic
         }
         root[mark] = true;
-        for (i in root) {
+        _keys = Object_allKeys(root);
+        _keys.push('prototype');
+        
+        for (_i = 0;_i < _keys.length; _i++) {
+          i = _keys[_i];
           if (i !== mark) {
             if (i.match(/^[$A-Z_][0-9A-Z_$]*$/i)) {
               newContext = [context, i].join('.');
